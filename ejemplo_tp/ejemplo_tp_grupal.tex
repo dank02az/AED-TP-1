@@ -133,7 +133,7 @@ Ejercicio 1
 \begin{proc}{redistribucionDeLosFrutos}{\In recursos : \TLista{\float}, \In cooperan : \TLista{\bool}}{\TLista{\float}}
 	%    \modifica{parametro1, parametro2,..}
 	\requiere{recursos > 0}
-	\asegura{\paraTodo[]{i}{cooperan}{\IfThenElse{cooperan[i] = True}{recursos[i] = fondo \hspace{0.15cm} / \hspace{0.15cm} |cooperan|}{recursos[i] = \newline recursos[old(i)] \hspace{0.15cm} +  \hspace{0.15cm} fondo \hspace{0.15cm} / \hspace{0.15cm} \neg sumaDeLosQueCooperan(cooperan)}}}
+	\asegura{\paraTodo{i}{cooperan}{\IfThenElse{cooperan[i] = True}{recursos[i] = fondo \hspace{0.15cm} / \hspace{0.15cm} |cooperan|}{recursos[i] = \newline recursos[old(i)] \hspace{0.15cm} +  \hspace{0.15cm} fondo \hspace{0.15cm} / \hspace{0.15cm} \neg sumaDeLosQueCooperan(cooperan)}}}
 	\aux{fondo}{in: recursos}{\nat}{\paraTodo[unaLinea]{i}{cooperan}
     {\IfThenElse{cooperan[i] \hspace{0.15cm} = \hspace{0.15cm} True}{recursos[i]}{0}}}
     \aux{sumaDeLosQueCooperan}{in: cooperan}{\TLista{\ent}}{\paraTodo[unaLinea]{i}{cooperan}{\IfThenElse{cooperan[i]=True}{recursos[i]}{0}}}
@@ -143,6 +143,18 @@ Ejercicio 1
 %  \   {if cooperan[i] = True then 1 else 0 fi}}
 
 \end{proc}
+
+\vspace{1.5cm}
+
+Ejercicio 3
+
+\begin{proc}{trayectoriaExtrañaEscalera}{\In trayectoria : \TLista{\float}}{\bool}
+	%    \modifica{parametro1, parametro2,..}
+	\requiere{|trayectoria| > 0}
+	\asegura{\sum\limits_{i=0}^{|trayectoria|-1} \IfThenElse{(trayectoria[0] > trayectoria[1]) \vee_L (\paraTodo[unaLinea]{j}{1 \leq j < |trayectoria| - 1}{trayectoria[j - 1] < trayectoria[j] < trayectoria[j+1]}) \vee_L (trayectoria[|trayectoria| - 1] > trayectoria[|trayectoria|-2])}{1}{0}}
+\end{proc}
+
+
 
 \subsection{Macros de la cátedra para especificar}
 
