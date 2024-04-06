@@ -126,6 +126,25 @@ endwhile
 Si se pone un label al \verb|lstlisting|, se puede referenciar: Código \ref{code:for}.
 
 
+\subsection{Nuestro TP}
+
+Ejercicio 1
+
+\begin{proc}{redistribucionDeLosFrutos}{\In recursos : \TLista{\float}, \In cooperan : \TLista{\bool}}{\TLista{\float}}
+	%    \modifica{parametro1, parametro2,..}
+	\requiere{recursos > 0}
+	\asegura{recursos[los \hspace{0.15cm} que \hspace{0.15cm} SI \hspace{0.15cm} cooperan] \hspace{0.15cm} = \hspace{0.15cm} fondo \hspace{0.15cm} / \hspace{0.15cm} sumaDeLosQueCooperan(cooperan)}
+    \asegura{recursos[los \hspace{0.15cm} que \hspace{0.15cm} NO \hspace{0.15cm} cooperan] \hspace{0.15cm} = \hspace{0.15cm} old(los que NO cooperan) + fondo \hspace{0.15cm} / \hspace{0.15cm} \neg sumaDeLosQueCooperan}
+	\aux{fondo}{in: recursos}{\nat}{\paraTodo[unaLinea]{i}{cooperan}
+    {if \hspace{0.15cm} cooperan[i] \hspace{0.15cm} = \hspace{0.15cm} True \hspace{0.15cm} then \hspace{0.15cm} recursos[i] \hspace{0.15cm} else \hspace{0.15cm} 0 fi}}
+    \aux{sumaDeLosQueCooperan}{in: cooperan}{seq \ent}{\paraTodo[unaLinea]{i}{cooperan}{\IfThenElse{cooperan[i]=True}{recursos[i]}{0}}}
+    
+ % \   {\ifthenelse{\equal{cooperan[i]}{True}}{recursos[i]}{0}}}
+
+%  \   {if cooperan[i] = True then 1 else 0 fi}}
+
+\end{proc}
+
 \subsection{Macros de la cátedra para especificar}
 
 \begin{proc}{nombre}{\In paramIn : \nat, \Inout paramInout : \TLista{\ent}}{tipoRes}
