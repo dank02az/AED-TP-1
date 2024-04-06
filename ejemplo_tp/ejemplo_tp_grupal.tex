@@ -126,6 +126,24 @@ endwhile
 Si se pone un label al \verb|lstlisting|, se puede referenciar: Código \ref{code:for}.
 
 
+\subsection{Nuestro TP}
+
+Ejercicio 1
+
+\begin{proc}{redistribucionDeLosFrutos}{\In recursos : \TLista{\float}, \In cooperan : \TLista{\bool}}{\TLista{\float}}
+	%    \modifica{parametro1, parametro2,..}
+	\requiere{recursos > 0}
+	\asegura{\paraTodo[]{i}{cooperan}{\IfThenElse{cooperan[i] = True}{recursos[i] = fondo \hspace{0.15cm} / \hspace{0.15cm} |cooperan|}{recursos[i] = recursos[old(i)] \hspace{0.15cm} +  \hspace{0.15cm} fondo \hspace{0.15cm} / \hspace{0.15cm} \neg sumaDeLosQueCooperan(cooperan)}}}
+	\aux{fondo}{in: recursos}{\nat}{\paraTodo[unaLinea]{i}{cooperan}
+    {\IfThenElse{cooperan[i] \hspace{0.15cm} = \hspace{0.15cm} True}{recursos[i]}{0}}}
+    \aux{sumaDeLosQueCooperan}{in: cooperan}{\TLista{\ent}}{\paraTodo[unaLinea]{i}{cooperan}{\IfThenElse{cooperan[i]=True}{recursos[i]}{0}}}
+    
+ % \   {\ifthenelse{\equal{cooperan[i]}{True}}{recursos[i]}{0}}}
+
+%  \   {if cooperan[i] = True then 1 else 0 fi}}
+
+\end{proc}
+
 \subsection{Macros de la cátedra para especificar}
 
 \begin{proc}{nombre}{\In paramIn : \nat, \Inout paramInout : \TLista{\ent}}{tipoRes}
