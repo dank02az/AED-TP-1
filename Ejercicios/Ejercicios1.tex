@@ -3,10 +3,12 @@
 
 \header{ Ejercicio 1 }\\
 
+
 \begin{proc}{redistribucionDeLosFrutos}{\In recursos : \TLista{\float}, \In cooperan : \TLista{\bool}}{\TLista{\float}}
-	%    \modifica{parametro1, parametro2,..}
-	\requiere{recursos > 0}
-	\asegura { |res| = |recursos| \land_{L} res = distribuirRecursos(cooperan,res) }
+	\requiere{recursos > 0 \land |recursos| = |cooperan| }
+	\asegura {|res| = |cooperan| \land_{L}\\ 
+(\forall i : {\ent}) ({0 \leq i \leq |res|  \land_{L} cooperan[i] = true \rightarrow_{L} res[i] = \frac{recursos[i] + fondo(recursos)}{|cooperan|} })   \land_{L} \\(\forall i : {\ent}) (0 \leq i \leq |res| \land_{L} cooperan[i] = False \rightarrow_{L} res[i] = \frac{recursos[i] + fondo(recursos)}{\neg sumaDeLosQueCooperan(cooperan)})\\
+ }
 
 \end{proc}
 \text{ }\\
@@ -20,12 +22,5 @@
 \aux{sumaDeLosQueCooperan}{in cooperan {\TLista{\ent}} }{{\ent}}{
 \sum\limits_{i=0} \limits^{|cooperan|-1}  
 ( {\IfThenElse{cooperan[i]=True}{recursos[i]}{0}} )}
-
-\text{ }\\
-
-\aux{distribuirRecursos}{in cooperan: {\TLista{\ent}}, inout res: {\TLista{\ent}} }{\TLista{\ent}} { \paraTodo{i}{\ent} { (0 \leq i \leq |cooperan|) \land_{L} 
-{\IfThenElse{cooperan[i] = True}{ res[i] = \frac{fondo(recursos)}{|cooperan|} }
-{res[i] =  \frac{recursos[i] + fondo(recursos)}{\neg sumaDeLosQueCooperan(cooperan)} } }}}
-
 
 
