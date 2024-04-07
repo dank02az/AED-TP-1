@@ -12,7 +12,7 @@
 	\requiere{|recursos| > 0 \yLuego |recursos| = |cooperan| }
 	\asegura {\\
  |res| = |cooperan| \yLuego \\ 
- \paraTodo[unalinea]{i}{\ent} {0 \leq i \leq |res|  \yLuego cooperan[i] = True \implicaLuego res[i] = \frac{recursos[i] + fondo(recursos)}{|cooperan|} }  \yLuego \\ \paraTodo[unalinea]{i}{\ent} {0 \leq i \leq |res| \yLuego cooperan[i] = False \implicaLuego res[i] = \frac{recursos[i] + fondo(recursos)}{\neg sumaDeLosQueCooperan(cooperan)}} \\
+ \paraTodo[unalinea]{i}{\ent} {0 \leq i \leq |res|  \yLuego cooperan[i] = True \implicaLuego res[i] = \frac{fondo(recursos)}{|cooperan|} }  \yLuego \\ \paraTodo[unalinea]{i}{\ent} {0 \leq i \leq |res| \yLuego cooperan[i] = False \implicaLuego res[i] = recursos[i] + \frac{fondo(recursos)}{|cooperan|}} \\
  }
 
 \end{proc}
@@ -22,13 +22,6 @@
 \aux{fondo}{in recursos : {\TLista{\ent}} }{\ent} {
 \sum\limits_{i=0} \limits^{|recursos|-1} 
 ( {\IfThenElse{cooperan[i] \hspace{0.15cm} = \hspace{0.15cm} True}{recursos[i]}{0}} )}
-
-\vspace{0.50cm}
-
-\aux{sumaDeLosQueCooperan}{in cooperan {\TLista{\ent}} }{{\ent}}{
-\sum\limits_{i=0} \limits^{|cooperan|-1}  
-( {\IfThenElse{cooperan[i]=True}{recursos[i]}{0}} )}
-
 
 
 \end{document}
