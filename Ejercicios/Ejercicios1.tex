@@ -5,9 +5,9 @@
 
 
 \begin{proc}{redistribucionDeLosFrutos}{\In recursos : \TLista{\float}, \In cooperan : \TLista{\bool}}{\TLista{\float}}
-	\requiere{recursos > 0 \land |recursos| = |cooperan| }
-	\asegura {|res| = |cooperan| \land_{L}\\ 
-(\forall i : {\ent}) ({0 \leq i \leq |res|  \land_{L} cooperan[i] = true \rightarrow_{L} res[i] = \frac{recursos[i] + fondo(recursos)}{|cooperan|} })   \land_{L} \\(\forall i : {\ent}) (0 \leq i \leq |res| \land_{L} cooperan[i] = False \rightarrow_{L} res[i] = \frac{recursos[i] + fondo(recursos)}{\neg sumaDeLosQueCooperan(cooperan)})\\
+	%    \modifica{parametro1, parametro2,..}
+	\requiere{|recursos| > 0 \land |recursos| = |cooperan| }
+	\asegura {|res| = |cooperan| \land_{L}\\ (\forall i : {\ent}) ({0 \leq i \leq |res|  \land_{L} cooperan[i] = True \rightarrow_{L} res[i] = \frac{recursos[i] + fondo(recursos)}{|cooperan|} })   \land_{L} \\(\forall i : {\ent}) (0 \leq i \leq |res| \land_{L} cooperan[i] = False \rightarrow_{L} res[i] = \frac{recursos[i] + fondo(recursos)}{\neg sumaDeLosQueCooperan(cooperan)})\\
  }
 
 \end{proc}
@@ -22,5 +22,4 @@
 \aux{sumaDeLosQueCooperan}{in cooperan {\TLista{\ent}} }{{\ent}}{
 \sum\limits_{i=0} \limits^{|cooperan|-1}  
 ( {\IfThenElse{cooperan[i]=True}{recursos[i]}{0}} )}
-
 
