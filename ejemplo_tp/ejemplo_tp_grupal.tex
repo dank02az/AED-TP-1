@@ -131,7 +131,6 @@ Si se pone un label al \verb|lstlisting|, se puede referenciar: Código \ref{cod
 Ejercicio 1
 
 \begin{proc}{redistribucionDeLosFrutos}{\In recursos : \TLista{\float}, \In cooperan : \TLista{\bool}}{\TLista{\float}}
-	%    \modifica{parametro1, parametro2,..}
 	\requiere{recursos > 0}
 	\asegura{recursos[los \hspace{0.15cm} que \hspace{0.15cm} SI \hspace{0.15cm} cooperan] \hspace{0.15cm} = \hspace{0.15cm} fondo \hspace{0.15cm} / \hspace{0.15cm} sumaDeLosQueCooperan(cooperan)}
     \asegura{recursos[los \hspace{0.15cm} que \hspace{0.15cm} NO \hspace{0.15cm} cooperan] \hspace{0.15cm} = \hspace{0.15cm} old(los que NO cooperan) + fondo \hspace{0.15cm} / \hspace{0.15cm} \neg sumaDeLosQueCooperan}

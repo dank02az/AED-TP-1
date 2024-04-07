@@ -1,25 +1,34 @@
+\documentclass[10pt,a4paper]{article}
+\input{AEDmacros}
+\begin{document}
 
 
+\section{Especificacion}
 
-\header{ Ejercicio 1 }\\
+\subsection{redistribucionDeLosFrutos}
 
 
 \begin{proc}{redistribucionDeLosFrutos}{\In recursos : \TLista{\float}, \In cooperan : \TLista{\bool}}{\TLista{\float}}
-	%    \modifica{parametro1, parametro2,..}
-	\requiere{|recursos| > 0 \land |recursos| = |cooperan| }
-	\asegura {|res| = |cooperan| \land_{L}\\ (\forall i : {\ent}) ({0 \leq i \leq |res|  \land_{L} cooperan[i] = True \rightarrow_{L} res[i] = \frac{recursos[i] + fondo(recursos)}{|cooperan|} })   \land_{L} \\(\forall i : {\ent}) (0 \leq i \leq |res| \land_{L} cooperan[i] = False \rightarrow_{L} res[i] = \frac{recursos[i] + fondo(recursos)}{\neg sumaDeLosQueCooperan(cooperan)})\\
+	\requiere{|recursos| > 0 \yLuego |recursos| = |cooperan| }
+	\asegura {\\
+ |res| = |cooperan| \yLuego \\ 
+ \paraTodo[unalinea]{i}{\ent} {0 \leq i \leq |res|  \yLuego cooperan[i] = True \implicaLuego res[i] = \frac{recursos[i] + fondo(recursos)}{|cooperan|} }  \yLuego \\ \paraTodo[unalinea]{i}{\ent} {0 \leq i \leq |res| \yLuego cooperan[i] = False \implicaLuego res[i] = \frac{recursos[i] + fondo(recursos)}{\neg sumaDeLosQueCooperan(cooperan)}} \\
  }
 
 \end{proc}
-\text{ }\\
- 
+
+\vspace{0.50cm}
+
 \aux{fondo}{in recursos : {\TLista{\ent}} }{\ent} {
 \sum\limits_{i=0} \limits^{|recursos|-1} 
 ( {\IfThenElse{cooperan[i] \hspace{0.15cm} = \hspace{0.15cm} True}{recursos[i]}{0}} )}
 
-\text{ }\\
+\vspace{0.50cm}
 
 \aux{sumaDeLosQueCooperan}{in cooperan {\TLista{\ent}} }{{\ent}}{
 \sum\limits_{i=0} \limits^{|cooperan|-1}  
 ( {\IfThenElse{cooperan[i]=True}{recursos[i]}{0}} )}
 
+
+
+\end{document}
