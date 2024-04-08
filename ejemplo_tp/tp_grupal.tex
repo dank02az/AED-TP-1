@@ -62,9 +62,8 @@
 \begin{proc}{trayectoriaExtrañaEscalera}{\In trayectoria : \TLista{\float}}{\bool}
 	%    \modifica{parametro1, parametro2,..}
 	\requiere{|trayectoria| > 0}
-	\asegura{\sum\limits_{i=0}^{|trayectoria|-1} \IfThenElse{((trayectoria[0] > trayectoria[1]) \vee_L (\paraTodo{j}{1 \leq j < |trayectoria| - 1}{trayectoria[j - 1] < trayectoria[j] < trayectoria[j+1]}) \vee_L (trayectoria[|trayectoria| - 1] > trayectoria[|trayectoria|-2])}{res = 1}{res = 0})}
+	\asegura{\sum\limits_{i=0}^{|trayectoria|-1} \IfThenElse{((trayectoria[0] > trayectoria[1]) \vee_L \newline (\paraTodo[unaLinea]{j}{1 \leq j < |trayectoria| - 1}{trayectoria[j - 1] < trayectoria[j] < trayectoria[j+1]}) \vee_L (trayectoria[|trayectoria| - 1] > trayectoria[|trayectoria|-2])}{res = 1}{res = 0})}
 \end{proc}
-
 
 
 \end{document}
