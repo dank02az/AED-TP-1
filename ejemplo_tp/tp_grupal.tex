@@ -1,0 +1,70 @@
+\documentclass[10pt,a4paper]{article}
+
+\input{AEDmacros}
+\usepackage{caratula} % Version modificada para usar las macros de algo1 de ~> https://github.com/bcardiff/dc-tex
+
+
+\titulo{Trabajo Práctico 1}
+\subtitulo{Especificación y WP}
+
+\fecha{\today}
+
+\materia{Algoritmos y Estructuras de Datos I}
+\grupo{Grupo "gliptodonte24"}
+
+\integrante{Maydana, Dani}{001/01}{email1@dominio.com}
+\integrante{Apellido, Jack}{002/01}{email2@dominio.com}
+\integrante{Cian, Andr'es Bautista}{937/21}{andycia802@gmail.com}
+\integrante{Apellido, ElFantasmaDeLaB}{004/01}{email4@dominio.com}
+% Pongan cuantos integrantes quieran
+
+% Declaramos donde van a estar las figuras
+% No es obligatorio, pero suele ser comodo
+\graphicspath{{../static/}}
+
+\begin{document}
+
+\maketitle
+
+
+
+\section{Especificaci'on}
+
+\subsection{redistribucionDeLosFrutos}
+
+
+\begin{proc}{redistribucionDeLosFrutos}{\In recursos : \TLista{\float}, \In cooperan : \TLista{\bool}}{\TLista{\float}}
+	\requiere{|recursos| > 0 \yLuego |recursos| = |cooperan| }
+	\asegura {\\
+ |res| = |cooperan| \yLuego \\ 
+ \paraTodo[unalinea]{i}{\ent} {(0 \leq i \leq |res|)  \implicaLuego \\ (\IfThenElse{cooperan[i] = True}{res[i] = \frac{fondo(recursos,  cooperan)}{|cooperan|}}{res[i] = recursos[i] + \frac{fondo(recursos,cooperan)}{|cooperan|}} }) \\
+ }
+
+
+\vspace{0.50cm}
+
+\aux{fondo}{in recursos : {\TLista{\ent}}, in cooperan : {\TLista{\bool}}}{\ent} {
+\sum\limits_{i=0} \limits^{|recursos|-1} 
+({\IfThenElse{cooperan[i] \hspace{0.15cm} = \hspace{0.15cm} True}{recursos[i]}{0}})}
+    
+ % \   {\ifthenelse{\equal{cooperan[i]}{True}}{recursos[i]}{0}}}
+
+%  \   {if cooperan[i] = True then 1 else 0 fi}}
+
+\end{proc}
+
+\vspace{1.5cm}
+
+\subsection{trayectoriaExtrañaEscalera}
+
+%  \  Ejercicio 3
+
+\begin{proc}{trayectoriaExtrañaEscalera}{\In trayectoria : \TLista{\float}}{\bool}
+	%    \modifica{parametro1, parametro2,..}
+	\requiere{|trayectoria| > 0}
+	\asegura{\sum\limits_{i=0}^{|trayectoria|-1} \IfThenElse{((trayectoria[0] > trayectoria[1]) \vee_L (\paraTodo{j}{1 \leq j < |trayectoria| - 1}{trayectoria[j - 1] < trayectoria[j] < trayectoria[j+1]}) \vee_L (trayectoria[|trayectoria| - 1] > trayectoria[|trayectoria|-2])}{res = 1}{res = 0})}
+\end{proc}
+
+
+
+\end{document}
