@@ -55,7 +55,11 @@
 
 \begin{proc}{trayectoriaDeLosFrutosIndividualesALargoPlazo}{\Inout trayectorias : \TLista{\TLista{\float}}, \In cooperan : \TLista{\bool}, \In apuestas : \TLista{\TLista{\float}}, \In pagos : \TLista{\TLista{\float}}, \In eventos : \TLista{\TLista{\bool}}}{\TLista{\TLista{\float}}}
     \requiere{True}
-    \asegura{True}
+    \asegura{\\
+    \paraTodo[unaLinea]{i}{\ent}{0 \leq i < |trayectorias| - 1\implicaLuego \newline trayectorias[i + 1] = redistribucionDeLosFrutos(trayectorias[i] + ganancias(apuestas[i], pagos[i], eventos[i]), cooperan)} \\
+    }
+
+    \aux {ganancias}{\In apuestas : \TLista{\TLista{\float}}, \In pagos : \TLista{\TLista{\float}}, \In eventos : \TLista{\TLista{\bool}}}{\TLista{\float}} {\paraTodo[unaLinea]{individuo}{0 \leq individuo < |apuestas|}{\IfThenElse {apuestas[i] = eventos[i]}{res[i] = pagos[i]}{res[i] = 0}}}
 \end{proc}
 
 \vspace{1.2cm}
@@ -66,7 +70,10 @@
 
 \begin{proc}{trayectoriaExtrañaEscalera}{\In trayectoria : \TLista{\float}}{\bool}
 	\requiere{|trayectoria| > 0}
-	\asegura{\sum\limits_{i=0}^{|trayectoria|-1} \IfThenElse{((trayectoria[0] > trayectoria[1]) \vee_L \newline (\paraTodo[unaLinea]{j}{1 \leq j < |trayectoria| - 1}{trayectoria[j - 1] < trayectoria[j] < trayectoria[j+1]}) \vee_L (trayectoria[|trayectoria| - 1] > trayectoria[|trayectoria|-2])}{res = 1}{res = 0})}
+	\asegura{\\
+ \sum\limits_{i=0}^{|trayectoria|-1} \IfThenElse{((trayectoria[0] > trayectoria[1]) \vee_L \newline (\paraTodo[unaLinea]{j}{1 \leq j < |trayectoria| - 1}{trayectoria[j - 1] < trayectoria[j] < trayectoria[j+1]}) \vee_L (trayectoria[|trayectoria| - 1] > trayectoria[|trayectoria|-2])}{res = 1}{res = 0}) \\
+ }
+ 
 \end{proc}
 
 \vspace{1.2cm}
@@ -78,7 +85,7 @@
 \begin{proc}{individuoDecideSiCooperarONo}{\In individuo : \nat, \In recursos : \TLista{\float}, \Inout cooperan : \TLista{\bool}, \In apuestas : \TLista{\TLista{\float}}, \In pagos : \TLista{\TLista{\float}}, \In eventos : \TLista{\TLista{\nat}}}{\TLista{\bool}}
 	\requiere{0 < individuo < |cooperan|}
 	\asegura{\\
- \sum\limits_{i=0}^{|trayectoria|-1} \IfThenElse{((trayectoria[0] > trayectoria[1]) \vee_L \newline (\paraTodo[unaLinea]{j}{1 \leq j < |trayectoria| - 1}{trayectoria[j - 1] < trayectoria[j] < trayectoria[j+1]}) \vee_L (trayectoria[|trayectoria| - 1] > trayectoria[|trayectoria|-2])}{res = 1}{res = 0})
+ \sum\limits_{i=0}^{|trayectoria|-1} \IfThenElse{((trayectoria[0] > trayectoria[1]) \vee_L \newline (\paraTodo[unaLinea]{j}{1 \leq j < |trayectoria| - 1}{trayectoria[j - 1] < trayectoria[j] < trayectoria[j+1]}) \vee_L (trayectoria[|trayectoria| - 1] > trayectoria[|trayectoria|-2])}{res = 1}{res = 0}) \\
  }
 \end{proc}
 
@@ -91,12 +98,13 @@
 
 %  \  Ejercicio 5
 
-% \ llama al proc del ejercicio 2, y asegura que el resultado de este ejercicio maximiza la siguiente expresión de la siguiente forma: res \req trayectorias[individuo[|trayectoria[individuo]|]]
+% \ llama al proc del ejercicio 2, y asegura que el resultado de este ejercicio maximiza la siguiente expresión de la siguiente forma: res \geq trayectorias[individuo[|trayectoria[individuo]|]]
 
+%     \    IDEA:
 
 \begin{proc}{individuoActualizaApuesta}{\In individuo : \nat, \In recursos : \TLista{\float}, \In cooperan : \TLista{\bool}, \Inout apuestas : \TLista{\TLista{\float}}, \In pagos : \TLista{\TLista{\float}}, \In eventos : \TLista{\TLista{\bool}}}{\TLista{\TLista{\float}}}
-    \requiere{True}
-    \asegura{True}
+    \requiere{0 < individuo < |cooperan|}
+    \asegura{trayectoriaDeLosFrutosIndividualesALargoPlazo[res] \geq trayectorias[individuo[|trayectoria[individuo]|]]}
 
 \end{proc}
 
