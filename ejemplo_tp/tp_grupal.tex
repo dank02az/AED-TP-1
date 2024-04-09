@@ -12,15 +12,9 @@
 \materia{Algoritmos y Estructuras de Datos I}
 \grupo{Grupo "gliptodonte24"}
 
-\integrante{Maydana, Dani}{001/01}{email1@dominio.com}
-\integrante{Apellido, Jack}{002/01}{email2@dominio.com}
+\integrante{Maydana, Daniel}{001/01}{email1@dominio.com}
+\integrante{Lozada, Jack}{1142/22}{nothingbutjack2200@gmail.com}
 \integrante{Cian, Andr'es Bautista}{937/21}{andycia802@gmail.com}
-\integrante{Apellido, ElFantasmaDeLaB}{004/01}{email4@dominio.com}
-% Pongan cuantos integrantes quieran
-
-% Declaramos donde van a estar las figuras
-% No es obligatorio, pero suele ser comodo
-\graphicspath{{../static/}}
 
 \begin{document}
 
@@ -34,7 +28,7 @@
 
 
 \begin{proc}{redistribucionDeLosFrutos}{\In recursos : \TLista{\float}, \In cooperan : \TLista{\bool}}{\TLista{\float}}
-	\requiere{|recursos| > 0 \yLuego |recursos| = |cooperan| }
+	\requiere{|recursos| > 0 \yLuego |recursos| = |cooperan|}
 	\asegura {\\
  |res| = |cooperan| \yLuego \\ 
  \paraTodo[unalinea]{i}{\ent} {(0 \leq i \leq |res|)  \implicaLuego \\ (\IfThenElse{cooperan[i] = True}{res[i] = \frac{fondo(recursos,  cooperan)}{|cooperan|}}{res[i] = recursos[i] + \frac{fondo(recursos,cooperan)}{|cooperan|}} }) \\
@@ -53,17 +47,57 @@
 
 \end{proc}
 
-\vspace{1.5cm}
+\vspace{1.2cm}
+
+\subsection{trayectoriaDeLosFrutosIndividualesALargoPlazo}
+
+%  \  Ejercicio 2
+
+\begin{proc}{trayectoriaDeLosFrutosIndividualesALargoPlazo}{\Inout trayectorias : \TLista{\TLista{\float}}, \In cooperan : \TLista{\bool}, \In apuestas : \TLista{\TLista{\float}}, \In pagos : \TLista{\TLista{\float}}, \In eventos : \TLista{\TLista{\bool}}}{\TLista{\TLista{\float}}}
+    \requiere{True}
+    \asegura{True}
+\end{proc}
+
+\vspace{1.2cm}
 
 \subsection{trayectoriaExtrañaEscalera}
 
 %  \  Ejercicio 3
 
 \begin{proc}{trayectoriaExtrañaEscalera}{\In trayectoria : \TLista{\float}}{\bool}
-	%    \modifica{parametro1, parametro2,..}
 	\requiere{|trayectoria| > 0}
 	\asegura{\sum\limits_{i=0}^{|trayectoria|-1} \IfThenElse{((trayectoria[0] > trayectoria[1]) \vee_L \newline (\paraTodo[unaLinea]{j}{1 \leq j < |trayectoria| - 1}{trayectoria[j - 1] < trayectoria[j] < trayectoria[j+1]}) \vee_L (trayectoria[|trayectoria| - 1] > trayectoria[|trayectoria|-2])}{res = 1}{res = 0})}
 \end{proc}
 
+\vspace{1.2cm}
+
+\subsection{individuoDecideSiCooperarONo}
+
+%  \  Ejercicio 4
+
+\begin{proc}{individuoDecideSiCooperarONo}{\In individuo : \nat, \In recursos : \TLista{\float}, \Inout cooperan : \TLista{\bool}, \In apuestas : \TLista{\TLista{\float}}, \In pagos : \TLista{\TLista{\float}}, \In eventos : \TLista{\TLista{\nat}}}{\TLista{\bool}}
+	\requiere{0 < individuo < |cooperan|}
+	\asegura{\\
+ \sum\limits_{i=0}^{|trayectoria|-1} \IfThenElse{((trayectoria[0] > trayectoria[1]) \vee_L \newline (\paraTodo[unaLinea]{j}{1 \leq j < |trayectoria| - 1}{trayectoria[j - 1] < trayectoria[j] < trayectoria[j+1]}) \vee_L (trayectoria[|trayectoria| - 1] > trayectoria[|trayectoria|-2])}{res = 1}{res = 0})
+ }
+\end{proc}
+
+
+\vspace{1.2cm}
+
+
+
+\subsection{individuoActualizaApuesta}
+
+%  \  Ejercicio 5
+
+% \ llama al proc del ejercicio 2, y asegura que el resultado de este ejercicio maximiza la siguiente expresión de la siguiente forma: res \req trayectorias[individuo[|trayectoria[individuo]|]]
+
+
+\begin{proc}{individuoActualizaApuesta}{\In individuo : \nat, \In recursos : \TLista{\float}, \In cooperan : \TLista{\bool}, \Inout apuestas : \TLista{\TLista{\float}}, \In pagos : \TLista{\TLista{\float}}, \In eventos : \TLista{\TLista{\bool}}}{\TLista{\TLista{\float}}}
+    \requiere{True}
+    \asegura{True}
+
+\end{proc}
 
 \end{document}
