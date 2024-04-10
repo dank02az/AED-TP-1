@@ -54,7 +54,8 @@
 %  \  Ejercicio 2
 
 \begin{proc}{trayectoriaDeLosFrutosIndividualesALargoPlazo}{\Inout trayectorias : \TLista{\TLista{\float}}, \In cooperan : \TLista{\bool}, \In apuestas : \TLista{\TLista{\float}}, \In pagos : \TLista{\TLista{\float}}, \In eventos : \TLista{\TLista{\bool}}}{\TLista{\TLista{\float}}}
-    \requiere{True}
+% requiere entradasValidas (misma cantidad de jugadores en todas los parámetros de entrada)
+    \requiere{|trayectorias| = |apuestas| = |pagos| = |eventos| \yLuego \paraTodo[]{jugadores}{\nat}{|cooperan| = |trayectorias[jugadores]| = |apuestas[jugadores]| = |pagos[jugadores]| = |eventos[jugadores]|}}
     \asegura{\\
     \paraTodo[unaLinea]{i}{\ent}{0 \leq i < |trayectorias| - 1\implicaLuego \newline trayectorias[i + 1] = redistribucionDeLosFrutos(trayectorias[i] + ganancias(apuestas[i], pagos[i], eventos[i]), cooperan)} \\
     }
@@ -83,7 +84,7 @@
 %  \  Ejercicio 4
 
 \begin{proc}{individuoDecideSiCooperarONo}{\In individuo : \nat, \In recursos : \TLista{\float}, \Inout cooperan : \TLista{\bool}, \In apuestas : \TLista{\TLista{\float}}, \In pagos : \TLista{\TLista{\float}}, \In eventos : \TLista{\TLista{\nat}}}{\TLista{\bool}}
-	\requiere{0 < individuo < |cooperan|}
+	\requiere{0 < individuo < |cooperan| \yLuego |apuestas| = |pagos| = |eventos| \yLuego \paraTodo[]{jugadores}{\nat}{|cooperan| = |apuestas[jugadores]| = |pagos[jugadores]| = |eventos[jugadores]|} \yLuego 0 \leq individuo < |recursos|}
 	\asegura{\\
  \sum\limits_{i=0}^{|trayectoria|-1} \IfThenElse{((trayectoria[0] > trayectoria[1]) \vee_L \newline (\paraTodo[unaLinea]{j}{1 \leq j < |trayectoria| - 1}{trayectoria[j - 1] < trayectoria[j] < trayectoria[j+1]}) \vee_L (trayectoria[|trayectoria| - 1] > trayectoria[|trayectoria|-2])}{res = 1}{res = 0}) \\
  }
