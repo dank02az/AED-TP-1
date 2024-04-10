@@ -14,7 +14,7 @@
 
 \integrante{Maydana, Daniel}{001/01}{email1@dominio.com}
 \integrante{Lozada, Jack}{1142/22}{nothingbutjack2200@gmail.com}
-\integrante{Cian, Andr'es Bautista}{937/21}{andycia802@gmail.com}
+\integrante{Cian, Andrés Bautista}{937/21}{andycia802@gmail.com}
 
 \begin{document}
 
@@ -26,9 +26,10 @@
 
 \subsection{redistribucionDeLosFrutos}
 
+%  \  Ejercicio 1
 
 \begin{proc}{redistribucionDeLosFrutos}{\In recursos : \TLista{\float}, \In cooperan : \TLista{\bool}}{\TLista{\float}}
-	\requiere{|recursos| > 0 \yLuego |recursos| = |cooperan|}
+	\requiere{\paraTodo[]{recurso}{recursos}{recurso \geq 0} \yLuego |recursos| = |cooperan|}
 	\asegura {\\
  |res| = |cooperan| \yLuego \\ 
  \paraTodo[unalinea]{i}{\ent} {(0 \leq i \leq |res|)  \implicaLuego \\ (\IfThenElse{cooperan[i] = True}{res[i] = \frac{fondo(recursos,  cooperan)}{|cooperan|}}{res[i] = recursos[i] + \frac{fondo(recursos,cooperan)}{|cooperan|}} }) \\
@@ -84,7 +85,7 @@
 %  \  Ejercicio 4
 
 \begin{proc}{individuoDecideSiCooperarONo}{\In individuo : \nat, \In recursos : \TLista{\float}, \Inout cooperan : \TLista{\bool}, \In apuestas : \TLista{\TLista{\float}}, \In pagos : \TLista{\TLista{\float}}, \In eventos : \TLista{\TLista{\nat}}}{\TLista{\bool}}
-	\requiere{0 < individuo < |cooperan| \yLuego |apuestas| = |pagos| = |eventos| \yLuego \paraTodo[]{jugadores}{\nat}{|cooperan| = |apuestas[jugadores]| = |pagos[jugadores]| = |eventos[jugadores]|} \yLuego 0 \leq individuo < |recursos|}
+	\requiere{0 < individuo < |cooperan| \yLuego |apuestas| = |pagos| = |eventos| \yLuego \paraTodo[]{jugadores}{\nat}{|cooperan| = |recursos| = |apuestas[jugadores]| = |pagos[jugadores]| = |eventos[jugadores]|} \yLuego 0 \leq individuo < |recursos| \yLuego \paraTodo[]{recurso}{recursos}{recurso \geq 0}}
 	\asegura{\\
  \sum\limits_{i=0}^{|trayectoria|-1} \IfThenElse{((trayectoria[0] > trayectoria[1]) \vee_L \newline (\paraTodo[unaLinea]{j}{1 \leq j < |trayectoria| - 1}{trayectoria[j - 1] < trayectoria[j] < trayectoria[j+1]}) \vee_L (trayectoria[|trayectoria| - 1] > trayectoria[|trayectoria|-2])}{res = 1}{res = 0}) \\
  }
