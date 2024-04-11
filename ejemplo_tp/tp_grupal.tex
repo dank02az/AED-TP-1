@@ -12,9 +12,10 @@
 \materia{Algoritmos y Estructuras de Datos I}
 \grupo{Grupo "gliptodonte24"}
 
-\integrante{Maydana, Daniel}{001/01}{email1@dominio.com}
+\integrante{Maydana, Daniel}{¿¿¿/¿¿}{email1@dominio.com}
 \integrante{Lozada, Jack}{1142/22}{nothingbutjack2200@gmail.com}
 \integrante{Cian, Andrés Bautista}{937/21}{andycia802@gmail.com}
+\integrante{¿, Santiago}{¿¿¿/¿¿}{email1@dominio.com}
 
 \begin{document}
 
@@ -58,7 +59,7 @@
 % requiere entradasValidas (misma cantidad de jugadores en todas los parámetros de entrada)
     \requiere{\paraTodo[unalinea]{jugadores}{\nat}{|trayectorias[jugador]| = |apuestas| = |pagos| = |eventos| \yLuego |cooperan| = |trayectorias| = |apuestas[jugador]| = |pagos[jugador]| = |eventos[jugador]|}}
     \asegura{\\
-    \paraTodo[unalinea]{jugador}{ent}{0 \leq jugador < |trayectorias| \paraTodo[unalinea]{i}{\ent}{0 \leq i < |trayectorias[jugador]| - 1\implicaLuego \newline trayectorias[i + 1] = redistribucionDeLosFrutos(trayectorias[i] + ganancias(apuestas[i], pagos[i], eventos[i]), cooperan)}} \\
+    \paraTodo[unalinea]{jugador}{\nat}{0 \leq jugador < |trayectorias| \paraTodo[unalinea]{i}{\ent}{0 \leq i < |trayectorias[jugador]| - 1\implicaLuego \newline trayectorias[i + 1] = redistribucionDeLosFrutos(trayectorias[i] + ganancias(apuestas[i], pagos[i], eventos[i]), cooperan)}} \\
     }
 
     \aux {ganancias}{\In apuestas : \TLista{\TLista{\float}}, \In pagos : \TLista{\TLista{\float}}, \In eventos : \TLista{\TLista{\bool}}}{\TLista{\float}} \\ {\paraTodo[unalinea]{individuo}{0 \leq individuo < |apuestas|}{\IfThenElse {apuestas[i] = eventos[i]}{res[i] = pagos[i]}{res[i] = 0}}}
