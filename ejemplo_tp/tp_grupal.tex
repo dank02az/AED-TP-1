@@ -30,10 +30,11 @@
 %  \  Ejercicio 1
 
 \begin{proc}{redistribucionDeLosFrutos}{\In recursos : \TLista{\float}, \In cooperan : \TLista{\bool}}{\TLista{\float}}
-	\requiere{\paraTodo[unalinea]{recurso}{recursos}{recurso \geq 0} \yLuego |recursos| = |cooperan|}
+	\requiere{(\forall \text{ recurso } \in \text{ recursos } \implicaLuego {recurso \geq 0) \land |recursos| = |cooperan|}
+}
 	\asegura {\\
  |res| = |cooperan| \yLuego \\ 
- \paraTodo[unalinea]{i}{\ent} {(0 \leq i \leq |res|)  \implicaLuego \\ (\IfThenElse{cooperan[i] = True}{res[i] = \frac{fondo(recursos,  cooperan)}{|cooperan|}}{res[i] = recursos[i] + \frac{fondo(recursos,cooperan)}{|cooperan|}} }) \\
+ \paraTodo[unalinea]{i}{\ent} {(0 \leq i < |res|)  \implicaLuego \\ (\IfThenElse{cooperan[i] = True}{res[i] = \frac{fondo(recursos,  cooperan)}{|cooperan|}}{res[i] = recursos[i] + \frac{fondo(recursos,cooperan)}{|cooperan|}} }) \\
  }
 
 
