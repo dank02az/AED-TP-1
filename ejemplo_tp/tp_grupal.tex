@@ -12,7 +12,7 @@
 \materia{Algoritmos y Estructuras de Datos I}
 \grupo{Grupo "gliptodonte24"}
 
-\integrante{Maydana, Daniel}{¿¿¿/¿¿}{email1@dominio.com}
+\integrante{Maydana, Daniel}{205/22}{danimaydana9@gmail.com}
 \integrante{Lozada, Jack}{1142/22}{nothingbutjack2200@gmail.com}
 \integrante{Cian, Andrés Bautista}{937/21}{andycia802@gmail.com}
 \integrante{Perez Lanzillotta, Santiago}{586/16}{santi.perezl@hotmail.com}
@@ -37,7 +37,7 @@
  \paraTodo[unalinea]{i}{\ent} {(0 \leq i < |res|)  \implicaLuego \\ (\IfThenElse{cooperan[i] = True}{res[i] = \frac{fondo(recursos,  cooperan)}{|cooperan|}}{res[i] = recursos[i] + \frac{fondo(recursos,cooperan)}{|cooperan|}} }) \\
  }
 
-
+\end{proc}
 \vspace{0.50cm}
 
 \aux{fondo}{in recursos : {\TLista{\ent}}, in cooperan : {\TLista{\bool}}}{\ent} {
@@ -48,7 +48,7 @@
 
 %  \   {if cooperan[i] = True then 1 else 0 fi}}
 
-\end{proc}
+
 
 \vspace{1.2cm}
 
@@ -58,27 +58,52 @@
 
 \begin{proc}{trayectoriaDeLosFrutosIndividualesALargoPlazo}{\Inout trayectorias : \TLista{\TLista{\float}}, \In cooperan : \TLista{\bool}, \In apuestas : \TLista{\TLista{\float}}, \In pagos : \TLista{\TLista{\float}}, \In eventos : \TLista{\TLista{\bool}}}{\TLista{\TLista{\float}}}
 % requiere entradasValidas (misma cantidad de jugadores en todas los parámetros de entrada)
-    \requiere{\paraTodo[unalinea]{jugadores}{\nat}{|trayectorias[jugador]| = |apuestas| = |pagos| = |eventos| \yLuego |cooperan| = |trayectorias| = |apuestas[jugador]| = |pagos[jugador]| = |eventos[jugador]|}}
+    \requiere{|trayectorias_{0}| = |trayectoria|  \yLuego \\ \paraTodo[unalinea]{individuo}{\nat}{0 \leq individuo < |trayectorias| \implicaLuego (|trayectorias[individuo]| > 0 \yLuego \\ |trayectorias[individuo]| = |apuestas| + 1 = |pagos| + 1 = |eventos| + 1) \yLuego \\ (|cooperan| = |trayectorias| = |apuestas[individuo]| = |pagos[individuo]| = |eventos[individuo]|)}}
     \asegura{\\
-    \paraTodo[unalinea]{jugador}{\nat}{0 \leq jugador < |trayectorias| \paraTodo[unalinea]{i}{\ent}{0 \leq i < |trayectorias[jugador]| - 1\implicaLuego \newline trayectorias[i + 1] = redistribucionDeLosFrutos(trayectorias[i] + ganancias(apuestas[i], pagos[i], eventos[i]), cooperan)}} \\
+    \paraTodo[unalinea]{individuo}{\nat}{0 \leq individuo < |trayectorias|  \implicaLuego |trayectorias[individuo]| = |trayectorias_{0}[individuo]| + 1  \land \paraTodo[unalinea]{\omega}{\ent}{0 \leq \omega < |matrizTraspuesta(trayectorias)| - 1 \implicaLuego \newline matrizTraspuesta[\omega + 1] = \\ redistribucionDeLosFrutos(ganancias(matrizTraspuesta(trayectoria)[|\omega|], matrizTraspuesta(apuestas)[|\omega|], \\ matrizTraspuesta(pagos)[|\omega|], matrizTraspuesta(eventos)[|\omega|]), matrizTraspuesta(cooperan)[|\omega|])} \yLuego \\ matrizTraspuesta(trayectorias)[\omega] = matrizTraspuesta(trayectorias_{0})[\omega]}\\
     }
 
-    \aux {ganancias}{\In apuestas : \TLista{\TLista{\float}}, \In pagos : \TLista{\TLista{\float}}, \In eventos : \TLista{\TLista{\bool}}}{\TLista{\float}} \\ {\paraTodo[unalinea]{individuo}{0 \leq individuo < |apuestas|}{\IfThenElse {apuestas[i] = eventos[i]}{res[i] = pagos[i]}{res[i] = 0}}}
 \end{proc}
+\vspace{0.50cm}
+
+\aux{ganancias}{\In ultimasTrayectorias : \TLista{\TLista{\float}}, \In ultimasApuestas : \TLista{\TLista{\float}}, \In ultimosPagos : \TLista{\TLista{\float}}, \In ultimosEventos : \TLista{\TLista{\nat}}}{\TLista{\TLista{\float}}}{\newline{\paraTodo[unalinea]{individuo}{\nat}{0 \leq individuo < |ultimasApuestas| \implicaLuego {$res[i]$ = \\ \IfThenElse {ultimasApuestas[individuo] = ultimosEventos[individuo]}{ultimosPagos[individuo]}{0}}}}}
+
+\vspace{0.50cm}
+
+\aux{matrizTraspuesta}{\Inout matriz : \TLista{\TLista{\float}}}{\TLista{\float}}{\\ \paraTodo[unalinea]{fila}{matriz}{\paraTodo[unalinea]{columna}{matriz}{matriz[fila][columna] = old(matriz[columna] [fila])}}}
+
 
 \vspace{1.2cm}
 
 \subsection{trayectoriaExtrañaEscalera}
+
 
 %  \  Ejercicio 3
 
 \begin{proc}{trayectoriaExtrañaEscalera}{\In trayectoria : \TLista{\float}}{\bool}
 	\requiere{|trayectoria| > 0}
 	\asegura{\\
- \sum\limits_{i=0}^{|trayectoria|-1} \IfThenElse{((trayectoria[0] > trayectoria[1]) \vee_L \newline (\paraTodo[unalinea]{j}{1 \leq j < |trayectoria| - 1}{trayectoria[j - 1] < trayectoria[j] < trayectoria[j+1]}) \vee_L (trayectoria[|trayectoria| - 1] > trayectoria[|trayectoria|-2])}{res = 1}{res = 0}) \\
- }
+ res = true \Leftrightarrow \\
+ (|trayectoria| = 1)  \vee  \\
+(|trayectoria| = 2 \yLuego (trayectoria[0] \neq trayectoria[1] )) \vee \\
+(|trayectoria| >= 3 \yLuego \\
+((ContadorMayoresExtremoMedio(trayectoria) + \\
+ContadorMayoresExtremoIzquierdo(trayectoria) + \\
+ContadorMayoresExtremoDerecho(trayectoria)) = 1))
  
-\end{proc}
+ }
+\vspace{0.8cm}
+ \end{proc}
+ \aux{ContadorMayoresExtremoMedio}{\In trayectoria : {\TLista{\float}}}{\ent} {\\
+\sum\limits_{i=1} \limits^{|trayectoria|-2} 
+({\IfThenElse{(trayectoria[i-1] < trayectoria[i]) \land (trayectoria[i]>trayectoria[i+1]) \hspace{0.15cm} = \hspace{0.15cm} True}{1}{0}})}
+\vspace{0.8cm}
+\aux{ContadorMayoresExtremoIzquierdo}{\In trayectoria : {\TLista{\float}}}{\ent} {\\
+{\IfThenElse{(trayectoria[0] > trayectoria[1]) \hspace{0.15cm} = \hspace{0.15cm} True}{1}{0}})}
+
+\vspace{0.8cm}
+\aux{ContadorMayoresExtremoDerecho}{\In trayectoria : {\TLista{\float}}}{\ent} {\\
+{\IfThenElse{(trayectoria[|trayectoria|-1] > trayectoria[|trayectoria|-2]) \hspace{0.15cm} = \hspace{0.15cm} True}{1}{0}})}
 
 \vspace{1.2cm}
 
@@ -88,7 +113,10 @@
 
 \begin{proc}{individuoDecideSiCooperarONo}{\In individuo : \nat, \In recursos : \TLista{\float}, \Inout cooperan : \TLista{\bool}, \In apuestas : \TLista{\TLista{\float}}, \In pagos : \TLista{\TLista{\float}}, \In eventos : \TLista{\TLista{\nat}}}{\TLista{\bool}}
 	\requiere{0 < individuo < |cooperan| \yLuego |apuestas| = |pagos| = |eventos| \yLuego \paraTodo[unalinea]{jugadores}{\nat}{|cooperan| = |recursos| = |apuestas[jugadores]| = |pagos[jugadores]| = |eventos[jugadores]|} \yLuego 0 \leq individuo < |recursos| \yLuego \paraTodo[unalinea]{recurso}{recursos}{recurso \geq 0}}
-	\asegura{True}
+	\asegura{cooperan[individuo] = \IfThenElse{trayectoriaDeLosFrutosIndividualesALargoPlazo(\\ \TLista{recursos}, setAt(cooperan, individuo, True), apuestas, pagos, eventos)[individuo[|eventos|]] \geq \\ trayectoriaDeLosFrutosIndividualesALargoPlazo(\\ \TLista{recursos}, setAt(cooperan, individuo, False), apuestas, pagos, eventos)[individuo[|eventos|]]}{True}{False}}
+
+%   Deprecated:   \  cooperan[individuo] = \IfThenElse{\existe{j}{\ent}{0 \leq j < |cooperan| \implicaLuego (cooperan[j] = False) \land apuestas[j] > 0 \land pagos[j] > 0 \land }}{False}{True}} \yLuego \paraTodo[unalinea]{i}{cooperan}{i \neq individuo 
+
 \end{proc}
 
 
@@ -106,7 +134,7 @@
 
 \begin{proc}{individuoActualizaApuesta}{\In individuo : \nat, \In recursos : \TLista{\float}, \In cooperan : \TLista{\bool}, \Inout apuestas : \TLista{\TLista{\float}}, \In pagos : \TLista{\TLista{\float}}, \In eventos : \TLista{\TLista{\bool}}}{\TLista{\TLista{\float}}}
     \requiere{0 < individuo < |cooperan|}
-    \asegura{trayectoriaDeLosFrutosIndividualesALargoPlazo[res] \geq trayectorias[individuo[|trayectoria[individuo]|]]}
+    \asegura{\paraTodo[unalinea]{a}{apuestas[individuo]}{\paraTodo[unalinea]{b}{\nat}{(0 \leq a, b \leq 1) \implicaLuego \\ (trayectoriaDeLosFrutosIndividualesALargoPlazo(\\ \TLista{recursos}, cooperan, setAt(apuestas, individuo, a), pagos, eventos)[individuo[|eventos|]] \geq \\ trayectoriaDeLosFrutosIndividualesALargoPlazo(\\ \TLista{recursos}, cooperan, setAt(apuestas, individuo, b), pagos, eventos)[individuo[|eventos|]])}}}
 
 \end{proc}
 
