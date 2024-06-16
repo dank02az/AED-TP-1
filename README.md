@@ -1,13 +1,12 @@
-# TP N°1  Especificacion y WP :
+# TP N°1  Diseño e implementacion de estructuras:
 
 ###  Algoritmo y Estructuras de Datos
 
-Presentación: viernes 5/4.\
-Entrega: sábado 20/4.\
-Recursos: https://www.overleaf.com/ 
+Presentación: viernes 14.\
+Entrega: sábado 22/6.\
+Recursos: 
+ * vizualizador de trie : https://www.cs.usfca.edu/~galles/visualization/Trie.html
 
-Link para editar el proyecto de Overleaf:
-https://es.overleaf.com/7124312431hyjdppjcsxdq#9eb21f
 
 
 
